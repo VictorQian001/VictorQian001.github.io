@@ -153,7 +153,12 @@
     .ring.d2{animation-delay:1.5s;}
   }
   @keyframes ring-pulse{0%{transform:scale(.55);opacity:.8;}100%{transform:scale(1.7);opacity:0;}}
-  .avatar svg{width:64%;position:relative;z-index:1;filter:drop-shadow(0 0 16px rgba(200,255,94,.7));}
+  .avatar img{
+    width:78%;aspect-ratio:1/1;object-fit:cover;border-radius:18px;
+    position:relative;z-index:1;
+    border:2px solid rgba(200,255,94,.5);
+    box-shadow:0 0 24px rgba(200,255,94,.55);
+  }
 
   .bio{--glow:255,255,255;grid-column:span 2;grid-row:span 2;}
   .bio p{font-size:16.5px;line-height:1.85;margin:0;color:#d7dadc;}
@@ -169,6 +174,17 @@
 
   .tech{--glow:200,255,94;grid-column:span 2;}
   .hobby{--glow:255,184,77;grid-column:span 2;}
+  .hobby-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:2px;}
+  .hobby-item{
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
+    padding:16px 8px;border-radius:12px;
+    background:rgba(255,184,77,.08);
+    border:1px solid rgba(255,184,77,.25);
+    transition:transform .25s ease, box-shadow .25s ease, background .25s ease;
+  }
+  .hobby-item:hover{transform:translateY(-3px);background:rgba(255,184,77,.14);box-shadow:0 8px 20px rgba(255,184,77,.3);}
+  .hobby-item .emoji{font-size:26px;line-height:1;}
+  .hobby-item .label{font-family:var(--mono);font-size:11.5px;color:#ffcf8a;}
   .edu{--glow:185,139,255;grid-column:span 2;}
 
   .work{--glow:94,241,255;grid-column:span 4;}
@@ -257,13 +273,7 @@
       <div class="card avatar">
         <div class="ring"></div>
         <div class="ring d2"></div>
-        <svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg">
-          <path d="M14 140 C14 98 40 86 70 86 C100 86 126 98 126 140 Z" fill="#c8ff5e"/>
-          <circle cx="70" cy="56" r="30" fill="#c8ff5e"/>
-          <rect x="42" y="52" width="22" height="14" rx="4" fill="#06070b"/>
-          <rect x="76" y="52" width="22" height="14" rx="4" fill="#06070b"/>
-          <rect x="64" y="57" width="12" height="4" fill="#06070b"/>
-        </svg>
+        <img src="avatar.jpg" alt="Victor Qian avatar">
       </div>
 
       <div class="card bio">
@@ -281,8 +291,11 @@
 
       <div class="card hobby">
         <h2>爱好</h2>
-        <div class="tags">
-          <span>骑车</span><span>射箭</span><span>羽毛球</span><span>匹克球</span>
+        <div class="hobby-grid">
+          <div class="hobby-item"><span class="emoji">🚴</span><span class="label">骑车</span></div>
+          <div class="hobby-item"><span class="emoji">🏹</span><span class="label">射箭</span></div>
+          <div class="hobby-item"><span class="emoji">🏸</span><span class="label">羽毛球</span></div>
+          <div class="hobby-item"><span class="emoji">🏓</span><span class="label">匹克球</span></div>
         </div>
       </div>
 
