@@ -6,6 +6,7 @@
 <title>Victor Qian · 培风社 OPC 社区</title>
 <meta name="description" content="Victor Qian — 退役程序员，现 vibe coder；前大厂，现 OPC 社区负责人。">
 <link rel="icon" href="data:,">
+<noscript><style>.card{opacity:1!important;transform:none!important;}</style></noscript>
 <style>
   :root{
     --bg:#f2f1ec;
@@ -46,7 +47,14 @@
     display:flex;justify-content:space-between;align-items:center;
     margin-bottom:24px;font-size:14px;color:var(--sub);letter-spacing:.02em;
   }
-  .top .dot{color:var(--hero);font-weight:600;}
+  .top .dot{color:var(--hero);font-weight:600;display:inline-block;}
+  @media (prefers-reduced-motion:no-preference){
+    .top .dot{animation:pulse-dot 2.4s ease-in-out infinite;}
+  }
+  @keyframes pulse-dot{
+    0%,100%{opacity:1;transform:scale(1);}
+    50%{opacity:.35;transform:scale(.82);}
+  }
   .grid{
     display:grid;
     grid-template-columns:repeat(4,1fr);
@@ -63,6 +71,26 @@
     overflow:hidden;
   }
   .card:hover{transform:translateY(-4px);box-shadow:var(--shadow-hover);}
+  .card::before{
+    content:"";
+    position:absolute;inset:0;
+    background:radial-gradient(280px circle at var(--mx,50%) var(--my,50%), rgba(255,255,255,.85), transparent 60%);
+    mix-blend-mode:overlay;
+    opacity:0;
+    transition:opacity .5s ease;
+    pointer-events:none;
+  }
+  .card:hover::before{opacity:1;}
+
+  @media (prefers-reduced-motion:no-preference){
+    .card{
+      opacity:0;
+      transform:translateY(28px);
+      transition:opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1), box-shadow .25s ease;
+    }
+    .card.in-view{opacity:1;transform:translateY(0);}
+    .card:hover{transform:translateY(-4px);}
+  }
 
   .hero{
     grid-column:span 3;grid-row:span 2;
@@ -299,5 +327,40 @@
 
     <footer>© 2026 Victor Qian · Built with Bento Grid</footer>
   </div>
+
+  <script>
+  (function(){
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var cards = Array.prototype.slice.call(document.querySelectorAll('.card'));
+
+    cards.forEach(function(el, i){
+      if(!reduce) el.style.transitionDelay = Math.min(i * 70, 420) + 'ms';
+    });
+
+    if(reduce || !('IntersectionObserver' in window)){
+      cards.forEach(function(c){ c.classList.add('in-view'); });
+    } else {
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if(entry.isIntersecting){
+            entry.target.classList.add('in-view');
+            io.unobserve(entry.target);
+          }
+        });
+      }, {threshold:.15, rootMargin:'0px 0px -40px 0px'});
+      cards.forEach(function(c){ io.observe(c); });
+    }
+
+    if(!reduce){
+      cards.forEach(function(c){
+        c.addEventListener('mousemove', function(e){
+          var r = c.getBoundingClientRect();
+          c.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+          c.style.setProperty('--my', (e.clientY - r.top) + 'px');
+        });
+      });
+    }
+  })();
+  </script>
 </body>
 </html>
