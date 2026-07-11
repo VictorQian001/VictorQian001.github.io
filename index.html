@@ -78,22 +78,17 @@
   section{padding:120px 40px;max-width:1200px;margin:0 auto;}
   .hero-section{padding-top:170px;padding-bottom:80px;}
 
-  .hero-type{position:relative;max-width:900px;}
-  .hero-type .line1{
-    font-size:clamp(56px,10vw,132px);font-weight:800;line-height:.92;letter-spacing:-.03em;
-    position:relative;z-index:2;margin:0;
-  }
-  .hero-type .line2{
-    font-size:clamp(56px,10vw,132px);font-weight:800;line-height:.92;letter-spacing:-.03em;
-    position:relative;z-index:0;margin:-.12em 0 0;color:var(--ink);
+  .hero-type{display:flex;align-items:center;gap:44px;flex-wrap:wrap;max-width:1100px;}
+  .hero-headline{flex:1 1 340px;min-width:280px;}
+  .hero-type .line1,.hero-type .line2{
+    font-size:clamp(48px,7.4vw,108px);font-weight:800;line-height:.95;letter-spacing:-.03em;margin:0;
   }
   .hero-photo{
-    position:absolute;z-index:1;top:38%;left:30%;transform:translate(-50%,-50%);
-    width:clamp(140px,18vw,220px);aspect-ratio:1/1;
+    flex:0 0 auto;width:clamp(150px,16vw,210px);aspect-ratio:1/1;
   }
   .hero-photo img{
     width:100%;height:100%;object-fit:cover;border-radius:28px;
-    border:4px solid var(--bg);box-shadow:0 20px 40px rgba(0,0,0,.18);
+    border:4px solid var(--paper);box-shadow:0 20px 40px rgba(0,0,0,.18);
   }
   .hero-cap{margin-top:56px;display:flex;flex-wrap:wrap;align-items:center;gap:22px;}
   .hero-cap p{font-size:15px;color:var(--sub);font-weight:600;margin:0;max-width:340px;}
@@ -207,8 +202,8 @@
     .topbar{padding:20px;}
     .statement,.about,.contact{margin:0 12px;padding:70px 24px;}
     .about-grid{grid-template-columns:1fr;gap:36px;}
-    .hero-photo{position:static;transform:none;width:120px;margin:20px 0;}
-    .hero-type .line2{margin-top:0;}
+    .hero-type{gap:24px;}
+    .hero-photo{width:110px;}
     .quick-info,.quick-info-panel{display:none;}
     .contact-type{font-size:clamp(30px,10vw,48px);}
   }
@@ -235,9 +230,11 @@
 
   <section class="hero-section" id="home">
     <div class="hero-type">
-      <p class="line1">VIBE</p>
+      <div class="hero-headline">
+        <p class="line1">VIBE</p>
+        <p class="line2">CODER</p>
+      </div>
       <div class="hero-photo"><img src="avatar2.jpg" alt="Victor Qian avatar"></div>
-      <p class="line2">CODER</p>
     </div>
     <div class="hero-cap">
       <p>退役程序员，现 vibe coder；前大厂，现 培风社 OPC 社区负责人；啥都会一点。</p>
